@@ -1,10 +1,18 @@
 import google.generativeai as genai
-import streamlit as st
 from IPython.display import display
 from IPython.display import Markdown
+import os
 import textwrap
+import streamlit as st
 
-genai.configure(api_key=st.secrets["api_key"])
+secret_api_key = os.getenv("API_KEY")
+if secret_api_key is None:
+    print("Using streamlit API key")
+    genai.configure(api_key=st.secrets["api_key"])
+else:
+    print("Using secret API key")
+    genai.configure(api_key=secret_api_key)
+
 
 def generate_HTML(dsl_code):
   model = genai.GenerativeModel('gemini-pro')

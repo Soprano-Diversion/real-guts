@@ -40,9 +40,10 @@ decoder.to(device)
 while bool(uploaded_file)==True:
     # Display uploaded image
     st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+    img_rgb = Image.open(uploaded_file)
 
     # Perform Conversion
-    code_result = generate_code(uploaded_file, tokenizer, vit_model, decoder)
+    code_result = generate_code(img_rgb, tokenizer, vit_model, decoder)
     dsl_code = '''{code_result}'''
     # Display extracted text
     st.subheader("Generated DSL Code:")

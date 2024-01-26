@@ -7,10 +7,9 @@ import numpy as np
 from model import GPT2DecoderWithImageFeatures
 from utils import img_transform, special_tokens_dict
 
-def generate_code(image_path, tokenizer, vit_model, decoder, max_length=512,device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def generate_code(image, tokenizer, vit_model, decoder, max_length=512,device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     # Load and preprocess the image
-    img_rgb = Image.open(image_path)
-    img_grey = img_rgb.convert("L")
+    img_grey = image.convert("L")
     img_adapted = img_grey.point(lambda x: 255 if x > 128 else 0)
     img_stacked = np.stack((img_adapted, img_adapted, img_adapted), axis=-1)
     img_stacked_pil = Image.fromarray(np.uint8(img_stacked), mode='RGB')
