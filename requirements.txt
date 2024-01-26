@@ -26,7 +26,6 @@ grpcio==1.60.0
 grpcio-status==1.60.0
 huggingface-hub==0.20.2
 idna==3.6
-importlib-metadata==6.11.0
 importlib_metadata==7.0.1
 ipykernel==6.28.0
 ipython==8.12.0
