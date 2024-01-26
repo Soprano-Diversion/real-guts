@@ -40,7 +40,6 @@ mpmath==1.3.0
 nest-asyncio==1.5.8
 networkx==3.2.1
 numpy
-openssl
 packaging==23.2
 pandas==2.1.4
 parso==0.8.3
