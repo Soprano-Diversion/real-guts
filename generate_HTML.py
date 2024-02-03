@@ -23,7 +23,9 @@ generation_config = {
 def generate_HTML(dsl_code, purpose):
   model = genai.GenerativeModel('gemini-pro')
 
-  prompt = f'''Please generate the proper content based on the purpose of the site, style the HTML, the purpose of the site is for {purpose}. Output the minified HTML and CSS code using the following DSL code!
+  prompt = f'''Please generate the proper content based on the purpose of the site, style the HTML using Tailwind CSS framework, the purpose of the site is for online shopping. link the style.css file to html. add lines, spaces and colours wherever it feels necessary. Output the HTML and CSS code!
+
+  DSL Code:
   {dsl_code}
   ''' 
 
