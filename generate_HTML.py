@@ -13,18 +13,17 @@ else:
     print("Using secret API key")
     genai.configure(api_key=secret_api_key)
 
-
-def generate_HTML(dsl_code):
-  model = genai.GenerativeModel('gemini-pro')
-
-  generation_config = {
+generation_config = {
   "temperature": 0.9,
   "top_p": 1,
   "top_k": 1,
   "max_output_tokens": 2048,
   }
 
-  prompt = f'''Please generate the proper content based on the purpose of the site, style the HTML, the purpose of the site is for reminders and to do. Output the minified HTML and CSS code using the following DSL code!
+def generate_HTML(dsl_code, purpose):
+  model = genai.GenerativeModel('gemini-pro')
+
+  prompt = f'''Please generate the proper content based on the purpose of the site, style the HTML, the purpose of the site is for {purpose}. Output the minified HTML and CSS code using the following DSL code!
   {dsl_code}
   ''' 
 

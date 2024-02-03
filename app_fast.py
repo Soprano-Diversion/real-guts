@@ -38,12 +38,12 @@ def health():
 @app.post("/generate")
 async def generate(image: UploadFile = File(...), custom_prompt: str = None):
     image_file = await image.read()
-
+    purpose = custom_prompt
     # Convert to PIL image
     image_file = Image.open(io.BytesIO(image_file))
 
     code_result = generate_code(image_file, tokenizer, vit_model, decoder)
-    gemini_result = generate_HTML(code_result)
+    gemini_result = generate_HTML(code_result, purpose)
 
     response = {
         "status": "ok",
