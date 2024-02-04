@@ -23,12 +23,31 @@ generation_config = {
 def generate_HTML(dsl_code, purpose):
   model = genai.GenerativeModel('gemini-pro')
 
-  prompt = f'''Please generate the proper content based on the purpose of the site, style the HTML using Tailwind CSS framework, the purpose of the site is for online shopping. link the style.css file to html. add lines, spaces and colours wherever it feels necessary. Output the HTML and CSS code!
-
-  DSL Code:
-  {dsl_code}
-  ''' 
+  prompt = f'''Please generate the proper content based on the purpose of the site, 
+              style the HTML using Tailwind CSS framework, the purpose of the site is for {purpose}. 
+              add lines, spaces and colours wherever it feels necessary. 
+              Output the HTML code with css in style tags!!
+              DSL Code:
+              {dsl_code}
+              ''' 
 
   response = model.generate_content(prompt)
   return response
 
+
+def generate_response(dsl_code, purpose):
+  model = genai.GenerativeModel('gemini-pro')
+
+  generatedHtml = generate_HTML(dsl_code, purpose).text
+
+  react_prompt = f'''Please convert this HTML code to React code.
+                    HTML Code:
+                    {generatedHtml}
+                  '''
+  react_response = model.generate_content(react_prompt)
+
+  return {
+    "html": generatedHtml,
+    "react": react_response.text
+  }
+  
