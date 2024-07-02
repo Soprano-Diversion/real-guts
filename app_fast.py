@@ -43,7 +43,7 @@ async def generate(image: UploadFile = File(...), custom_prompt: str = None):
     image_file = Image.open(io.BytesIO(image_file))
 
     code_result = generate_code(image_file, tokenizer, vit_model, decoder)
-    gemini_result = generate_HTML(code_result, purpose)
+    gemini_result = generate_response(code_result, purpose)
 
     response = {
         "status": "ok",
@@ -54,7 +54,8 @@ async def generate(image: UploadFile = File(...), custom_prompt: str = None):
         },
         "generated": {
             "dsl": code_result,
-            "html": gemini_result.text
+            "html": gemini_result["html"],
+            "react": gemini_result["react"]
         }
     }
     return response

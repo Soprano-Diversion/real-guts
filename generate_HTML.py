@@ -80,3 +80,20 @@ Output:
   response = model.generate_content(prompt)
   return response
 
+
+def generate_response(dsl_code, purpose):
+  model = genai.GenerativeModel('gemini-pro')
+
+  generatedHtml = generate_HTML(dsl_code, purpose).text
+
+  react_prompt = f'''Please convert this HTML code to React code.
+                    HTML Code:
+                    {generatedHtml}
+                  '''
+  react_response = model.generate_content(react_prompt)
+
+  return {
+    "html": generatedHtml,
+    "react": react_response.text
+  }
+  
