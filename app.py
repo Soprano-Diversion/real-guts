@@ -51,7 +51,7 @@ while bool(uploaded_file)==True:
 
     # Display HTML/CSS code
     st.subheader("Generated HTML/CSS Code:")
-    Gemini_HTML_code = generate_HTML(dsl_code, "search engine")
+    Gemini_HTML_code = generate_HTML(code_result)
     HTML_code = Gemini_HTML_code.text
     st.markdown(HTML_code)
     break
